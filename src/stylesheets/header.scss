@@ -1,0 +1,23 @@
+@import "variables";
+
+.header {
+  margin-top: 20px;
+  height: 100px;
+  padding: 20px 0 0;
+  background-image: url("../images/Pokémon_logo.png");
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: top;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  &__title {
+    margin: 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    color: $logoYellow;
+    text-shadow: -2px 0px $logoDarkBlue, 2px 0px $logoDarkBlue,
+      0px -2px $logoDarkBlue, 0px 2px $logoDarkBlue;
+  }
+}

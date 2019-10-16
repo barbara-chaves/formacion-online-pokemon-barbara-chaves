@@ -1,0 +1,23 @@
+.list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 140px 140px;
+  gap: 20px;
+  justify-content: center;
+
+  @media all and (min-width: 760px) {
+    grid-template-columns: repeat(3, 200px);
+  }
+  @media all and (min-width: 1020px) {
+    grid-template-columns: repeat(4, 200px);
+  }
+  @media all and (min-width: 1600px) {
+    grid-template-columns: repeat(6, 200px);
+  }
+}
+
+.list__item {
+  display: flex;
+  align-items: flex-end;
+}
