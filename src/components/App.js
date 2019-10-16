@@ -24,12 +24,12 @@ class App extends React.Component {
   };
 
   getInicialState = () => {
-    const pokemonsFromLocal = JSON.parse(localStorage.getItem("pokemons"));
-    if (pokemonsFromLocal) {
-      this.setState({ pokemons: pokemonsFromLocal });
-    } else {
+    // const pokemonsFromLocal = JSON.parse(localStorage.getItem("pokemons"));
+    // if (pokemonsFromLocal) {
+    //   this.setState({ pokemons: pokemonsFromLocal });
+    // } else {
       getPokemonsList().then(pokemons => this.setState({ pokemons }));
-    }
+    // }
   };
 
   getPokemonName = selectedPokemon => {
@@ -63,18 +63,17 @@ class App extends React.Component {
   };
 
   renderDetails = renderProps => {
-    return <Details pokemonName={renderProps.match.params.name} />;
+    return <Details pokemonName={renderProps.match.params.name} pokemonList={this.state.pokemons}/>;
   };
 
   saveLocalStorage = () => {
-    if (this.state.pokemons.length) {
+    if (this.state.pokemons) {
       localStorage.setItem("pokemons", JSON.stringify(this.state.pokemons));
     }
   };
 
   render() {
-    this.saveLocalStorage();
-    console.log('p')
+    // this.saveLocalStorage();
     return (
       <div className="App">
         <Switch>

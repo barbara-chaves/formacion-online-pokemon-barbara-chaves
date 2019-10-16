@@ -1,34 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../stylesheets/details.scss";
 import getDetailsFromServer from "../modules/getDetailsFromServer";
+import darkenColor from "../modules/darkerColor";
 import Profile from "./Profile";
-
-function darkenColor(col, amt) {
-  var usePound = false;
-
-  if (col[0] === "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
-
-  var num = parseInt(col, 16);
-  var r = (num >> 16) + amt;
-
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
-
-  var b = ((num >> 8) & 0x00ff) + amt;
-
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
-
-  var g = (num & 0x0000ff) + amt;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
-}
 
 class Details extends React.Component {
   constructor(props) {
@@ -53,6 +28,12 @@ class Details extends React.Component {
     }
   };
 
+  componentWillUpdate = () => {
+    getDetailsFromServer(this.props.pokemonName).then(details =>
+      this.setState({ details })
+    );
+  };
+
   saveLocalStorage = () => {
     if (this.state.details) {
       localStorage.setItem("details", JSON.stringify(this.state.details));
@@ -69,6 +50,7 @@ class Details extends React.Component {
       capture_rate,
       colors,
       egg_groups,
+      evolution,
       id,
       image,
       weight,
@@ -102,6 +84,40 @@ class Details extends React.Component {
       return list ? <ul>{renderList()}</ul> : "";
     };
 
+    const getEvolution = () => {
+      const currPokemon = pokemon => {
+        return pokemon.name === name ? "currentPokemon" : null;
+      };
+
+      const getEvolutionItem = (e, index) => {
+        const pokemon = this.props.pokemonList.find(
+          pokemon => pokemon.name === e
+        );
+        return pokemon ? (
+          <li
+            key={index}
+            className={"evolution__list__item " + currPokemon(pokemon)}
+          >
+            <Link to={pokemon.name}>
+              <img src={pokemon.image} alt={pokemon.name} />
+            </Link>
+          </li>
+        ) : null;
+      };
+
+      const getEvolutionList = (especie, index) => {
+        return especie ? (
+          <ul key={index} className="evolution__list">
+            {especie.map((e, index) => getEvolutionItem(e, index))}
+          </ul>
+        ) : null;
+      };
+
+      return evolution.map((especie, index) =>
+        getEvolutionList(especie, index)
+      );
+    };
+
     return Object.keys(this.state.details).length ? (
       <div className="details-page" style={getBGColor()}>
         <div className="details">
@@ -119,22 +135,28 @@ class Details extends React.Component {
               <p className="description__text">{text}</p>
             </section>
             <section className="profile">
-              <h2 className="profile__title" style={getTitlesColor()}>
+              <h2 className="profile__title --title" style={getTitlesColor()}>
                 Profile
               </h2>
-              <Profile quest={"Heigth: "} data={`${height}m`} />
+              <Profile quest={"Height: "} data={`${height}m`} />
               <Profile quest={"Weight: "} data={`${weight}kg`} />
               <Profile quest={"Catch Rate: "} data={`${capture_rate}%`} />
               <Profile quest={"Egg Groups: "} data={getList(egg_groups)} />
               <Profile quest={"Abilities: "} data={getList(abilities)} />
               <Profile quest={"Gender Ratio: "} data={gender_rate} />
             </section>
+            <section className="evolutions">
+              <h2 className="evolutions__title --title" style={getTitlesColor()}>
+                Evolutions
+              </h2>
+              <div className="evolution">{getEvolution()}</div>
+            </section>
           </div>
         </div>
       </div>
     ) : (
       <div className="loading">
-        <div className='pokemon'></div>
+        <div className="pokemon"></div>
       </div>
     );
   }

@@ -29,21 +29,25 @@ const getPokemonColor = types => {
   return getPokemonTypes(types).map(type => colors[type])
 }
 
-const getPokemonsList = () => {
+const createPromisesList = () => {
   const promises = [];
   for (let i = 1; i <= 151; i++){
     promises.push(getPokemon(i));
   }
-  return Promise.all(promises)
-    .then(data => data.forEach(pokemon => {
-    const {species, sprites, types} = pokemon;
+  return promises
+}
+
+const getPokemonsList = async () => {
+  const data = await Promise.all(createPromisesList());
+  return data.map(pokemon => {
+    const { species, sprites, types } = pokemon;
     return {
       name: species.name,
       image: sprites.front_default,
       types: getPokemonTypes(types),
       colors: getPokemonColor(types)
-    }
-  }))
+    };
+  });
 }
 
 export { getPokemonsList, getPokemonColor };
