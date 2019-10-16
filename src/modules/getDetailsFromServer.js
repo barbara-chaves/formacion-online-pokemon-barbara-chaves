@@ -11,10 +11,13 @@ const getPokemonsList = (pokemon) => {
   return Promise.all(promises)
 }
 
+const getData = (data) => data.find(item => item.language.name === 'en')
+
 const formatData = data => {
   const info = Object.assign(data[0], data[1]);
+
   const {name, height, id, capture_rate, egg_groups, gender_rate, abilities, flavor_text_entries, weight, sprites, types, genera} = info;
-  console.log(info)
+
   return {
     abilities: abilities.map(ability => ability.ability.name), 
     capture_rate: capture_rate,
@@ -25,8 +28,8 @@ const formatData = data => {
     id: id,
     image: sprites.front_default,
     name: name,
-    translated_name: genera.find(item => item.language.name === 'en').genus,
-    text: flavor_text_entries.find(item => item.language.name === 'en').flavor_text,
+    translated_name: getData(genera).genus,
+    text: getData(flavor_text_entries).flavor_text,
     types: types.map(type => type.type.name).sort(),
     weight: weight/10
   }

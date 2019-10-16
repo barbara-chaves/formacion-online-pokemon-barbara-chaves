@@ -133,7 +133,9 @@ class Details extends React.Component {
         </div>
       </div>
     ) : (
-      <p>Loading</p>
+      <div className="loading">
+        <div className='pokemon'></div>
+      </div>
     );
   }
 }

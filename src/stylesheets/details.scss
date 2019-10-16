@@ -2,6 +2,8 @@
   box-sizing: border-box;
   padding: 50px 10px;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .details {
@@ -10,7 +12,7 @@
   margin: auto;
   background-color: #fff;
   text-align: center;
-  @media all and (min-width: 620px) {
+  @media all and (min-width: 760px) {
     font-size: 20px;
   }
 
@@ -28,6 +30,10 @@
   .description {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    @media all and (min-width: 760px) {
+      padding: 0 20px;
+    }
+
     &__image {
       grid-column: 1;
       grid-row: 1/ 2;
@@ -43,8 +49,9 @@
       }
       li {
         display: inline-block;
-        margin-right: 10px;
+        margin: 10px;
         padding: 5px 10px;
+        border-radius: 12px;
       }
     }
     &__id {
@@ -69,17 +76,25 @@
     text-align: left;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
+    padding-bottom: 20px;
+    @media all and (min-width: 760px) {
+      column-gap: 40px;
+      padding: 0 20px 20px;
+    }
     &__title {
       grid-column: span 2;
-      padding-left: 10px;
       margin: 10px 0;
       color: white;
       font-weight: 400;
     }
     &__text {
+      margin: 0 10px;
+      border-bottom: 1px solid gray;
       display: flex;
+      justify-content: space-between;
       text-transform: capitalize;
+      text-align: right;
       ul {
         list-style: none;
         padding: 0;
@@ -88,7 +103,57 @@
       &__span {
         width: 50%;
         font-weight: bold;
+        text-align: left;
       }
     }
+  }
+}
+
+.loading {
+  .pokemon {
+    width: 200px;
+    height: 200px;
+    margin: 25% auto;
+    border: 5px solid black;
+    border-radius: 50%;
+    background: linear-gradient(
+      red 0%,
+      red 50%,
+      black 50%,
+      black 55%,
+      white 55%,
+      white 100%
+    );
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+
+    &::after {
+      position: absolute;
+      transform: translateY(70px);
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      border: 7px solid black;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
