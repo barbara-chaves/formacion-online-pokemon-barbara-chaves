@@ -74,7 +74,7 @@ class App extends React.Component {
 
   render() {
     this.saveLocalStorage();
-
+    console.log('p')
     return (
       <div className="App">
         <Switch>

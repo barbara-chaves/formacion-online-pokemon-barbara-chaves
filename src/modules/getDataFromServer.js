@@ -36,7 +36,7 @@ const getPokemonsList = () => {
   }
   return Promise.all(promises)
     .then(data => data.forEach(pokemon => {
-    const {species, sprites, types} = pokemon
+    const {species, sprites, types} = pokemon;
     return {
       name: species.name,
       image: sprites.front_default,
