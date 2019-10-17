@@ -40,12 +40,13 @@ const createPromisesList = () => {
 const getPokemonsList = async () => {
   const data = await Promise.all(createPromisesList());
   return data.map(pokemon => {
-    const { species, sprites, types } = pokemon;
+    const { id, species, sprites, types } = pokemon;
     return {
-      name: species.name,
+      colors: getPokemonColor(types),
+      id: id,
       image: sprites.front_default,
+      name: species.name,
       types: getPokemonTypes(types),
-      colors: getPokemonColor(types)
     };
   });
 }

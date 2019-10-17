@@ -4,6 +4,7 @@ import "../stylesheets/details.scss";
 import getDetailsFromServer from "../modules/getDetailsFromServer";
 import darkenColor from "../modules/darkerColor";
 import ProfileItem from "./ProfileItem";
+import Buttons from "./Buttons";
 
 class Details extends React.Component {
   constructor(props) {
@@ -11,38 +12,40 @@ class Details extends React.Component {
     this.state = {
       details: {}
     };
-    this.handleEvolutionClick = this.handleEvolutionClick.bind(this)
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.getInicialState();
   };
 
   getInicialState = () => {
-    const detailsFromLocal = JSON.parse(localStorage.getItem("details"));
-    if (Object.keys(detailsFromLocal).length) {
-      this.setState({ details: detailsFromLocal });
-    } else {
+    // const detailsFromLocal = JSON.parse(localStorage.getItem("details"));
+    // if (Object.keys(detailsFromLocal).length) {
+    //   this.setState({ details: detailsFromLocal });
+    // } else {
       getDetailsFromServer(this.props.pokemonName).then(details =>
         this.setState({ details })
       );
-    }
+    // }
   };
 
-  handleEvolutionClick = () => {
-    getDetailsFromServer(this.props.pokemonName).then(details =>
+  componentDidUpdate = () => {
+    if (this.props.pokemonName !== this.state.details.name){
+      getDetailsFromServer(this.props.pokemonName).then(details =>
       this.setState({ details })
     );
+    }
+    
   }
 
-  saveLocalStorage = () => {
-    if (this.state.details) {
-      localStorage.setItem("details", JSON.stringify(this.state.details));
-    }
-  };
+  // saveLocalStorage = () => {
+  //   if (this.state.details) {
+  //     localStorage.setItem("details", JSON.stringify(this.state.details));
+  //   }
+  // };
 
   render() {
-    this.saveLocalStorage();
+    // this.saveLocalStorage();
 
     const {
       abilities,
@@ -120,9 +123,17 @@ class Details extends React.Component {
       );
     };
 
+    const getPrevPokemon = (id) => {
+      return id > 1 ? this.props.pokemonList.filter(pok => pok.id === id - 1)[0].name : ''
+    }
+
+    const getNextPokemon = (id) => {
+      return id < 151 ? this.props.pokemonList.filter(pok => pok.id === id + 1)[0].name : ''
+    }
+
     return Object.keys(this.state.details).length ? (
       <div className="details-page" style={getBGColor()}>
-        <Link to='/'><button  className="back-btn">Back</button></Link>
+        <Buttons prev={getPrevPokemon(id)} next={getNextPokemon(id)}/>
         <div className="details">
           <h1 className="details__name" style={getTitlesColor()}>
             {name}
