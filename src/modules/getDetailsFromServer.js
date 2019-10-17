@@ -23,7 +23,9 @@ const getEvolution = info => {
       const second = evolution.chain.evolves_to.map(
         specie => specie.species.name
       );
-      const getThird = () => evolution.chain.evolves_to[0].evolves_to[0] ? [evolution.chain.evolves_to[0].evolves_to[0].species.name] : null;
+      const getThird = () => 
+      evolution.chain &&
+      evolution.chain.evolves_to[0] && evolution.chain.evolves_to[0].evolves_to[0] ? [evolution.chain.evolves_to[0].evolves_to[0].species.name] : null;
       return [first, second, getThird()];
     });
 };

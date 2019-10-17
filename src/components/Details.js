@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "../stylesheets/details.scss";
 import getDetailsFromServer from "../modules/getDetailsFromServer";
 import darkenColor from "../modules/darkerColor";
-import Profile from "./Profile";
+import ProfileItem from "./ProfileItem";
+import Buttons from "./Buttons";
 
 class Details extends React.Component {
   constructor(props) {
@@ -18,30 +19,33 @@ class Details extends React.Component {
   };
 
   getInicialState = () => {
-    const detailsFromLocal = JSON.parse(localStorage.getItem("details"));
-    if (Object.keys(detailsFromLocal).length) {
-      this.setState({ details: detailsFromLocal });
-    } else {
+    // const detailsFromLocal = JSON.parse(localStorage.getItem("details"));
+    // if (Object.keys(detailsFromLocal).length) {
+    //   this.setState({ details: detailsFromLocal });
+    // } else {
       getDetailsFromServer(this.props.pokemonName).then(details =>
         this.setState({ details })
       );
-    }
+    // }
   };
 
   componentDidUpdate = () => {
-    getDetailsFromServer(this.props.pokemonName).then(details =>
+    if (this.props.pokemonName !== this.state.details.name){
+      getDetailsFromServer(this.props.pokemonName).then(details =>
       this.setState({ details })
     );
-  };
-
-  saveLocalStorage = () => {
-    if (this.state.details) {
-      localStorage.setItem("details", JSON.stringify(this.state.details));
     }
-  };
+    
+  }
+
+  // saveLocalStorage = () => {
+  //   if (this.state.details) {
+  //     localStorage.setItem("details", JSON.stringify(this.state.details));
+  //   }
+  // };
 
   render() {
-    this.saveLocalStorage();
+    // this.saveLocalStorage();
 
     const {
       abilities,
@@ -97,6 +101,7 @@ class Details extends React.Component {
           <li
             key={index}
             className={"evolution__list__item " + currPokemon(pokemon)}
+            onClick={this.handleEvolutionClick}
           >
             <Link to={pokemon.name}>
               <img src={pokemon.image} alt={pokemon.name} />
@@ -118,8 +123,17 @@ class Details extends React.Component {
       );
     };
 
+    const getPrevPokemon = (id) => {
+      return id > 1 ? this.props.pokemonList.filter(pok => pok.id === id - 1)[0].name : ''
+    }
+
+    const getNextPokemon = (id) => {
+      return id < 151 ? this.props.pokemonList.filter(pok => pok.id === id + 1)[0].name : ''
+    }
+
     return Object.keys(this.state.details).length ? (
       <div className="details-page" style={getBGColor()}>
+        <Buttons prev={getPrevPokemon(id)} next={getNextPokemon(id)}/>
         <div className="details">
           <h1 className="details__name" style={getTitlesColor()}>
             {name}
@@ -138,12 +152,12 @@ class Details extends React.Component {
               <h2 className="profile__title --title" style={getTitlesColor()}>
                 Profile
               </h2>
-              <Profile quest={"Height: "} data={`${height}m`} />
-              <Profile quest={"Weight: "} data={`${weight}kg`} />
-              <Profile quest={"Catch Rate: "} data={`${capture_rate}%`} />
-              <Profile quest={"Egg Groups: "} data={getList(egg_groups)} />
-              <Profile quest={"Abilities: "} data={getList(abilities)} />
-              <Profile quest={"Gender Ratio: "} data={gender_rate} />
+              <ProfileItem quest={"Height: "} data={`${height}m`} />
+              <ProfileItem quest={"Weight: "} data={`${weight}kg`} />
+              <ProfileItem quest={"Catch Rate: "} data={`${capture_rate}%`} />
+              <ProfileItem quest={"Egg Groups: "} data={getList(egg_groups)} />
+              <ProfileItem quest={"Abilities: "} data={getList(abilities)} />
+              <ProfileItem quest={"Gender Ratio: "} data={gender_rate} />
             </section>
             <section className="evolutions">
               <h2 className="evolutions__title --title" style={getTitlesColor()}>

@@ -4,7 +4,6 @@ import "../stylesheets/app.scss";
 import { getPokemonsList } from "../modules/getDataFromServer";
 import List from "./List";
 import Details from "./Details";
-// import getDetailsFromServer from "../modules/getDetailsFromServer";
 
 class App extends React.Component {
   constructor() {
@@ -15,7 +14,6 @@ class App extends React.Component {
       filter: ""
     };
 
-    // this.getPokemonName = this.getPokemonName.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -26,13 +24,6 @@ class App extends React.Component {
   getInicialState = () => {
     getPokemonsList().then(pokemons => this.setState({ pokemons }));
   };
-
-  // getPokemonName = selectedPokemon => {
-  //   this.setState({ selectedPokemon });
-  //   getDetailsFromServer(selectedPokemon).then(detale =>
-  //     this.setState({ detale })
-  //   );
-  // };
 
   handleInputChange = event => {
     const filter = event.target.value;
@@ -61,14 +52,7 @@ class App extends React.Component {
     return <Details pokemonName={renderProps.match.params.name} pokemonList={this.state.pokemons}/>;
   };
 
-  // saveLocalStorage = () => {
-  //   if (this.state.pokemons) {
-  //     localStorage.setItem("pokemons", JSON.stringify(this.state.pokemons));
-  //   }
-  // };
-
   render() {
-    // this.saveLocalStorage();
     return (
       <div className="App">
         <Switch>

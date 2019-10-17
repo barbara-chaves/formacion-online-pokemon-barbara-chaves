@@ -1,0 +1,13 @@
+.buttons {
+  max-width: 700px;
+  min-width: 300px;
+
+  .--btn {
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 7px;
+    margin: 15px;
+    font-size: 1em;
+  }
+}
