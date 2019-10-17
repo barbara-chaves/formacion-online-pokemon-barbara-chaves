@@ -4,13 +4,13 @@ import "../stylesheets/card.scss";
 
 const Card = props => {
   const { name, image, colors } = props.pokemon;
-  const handleClick = () => props.getPokemonName(name);
+  // const handleClick = () => props.getPokemonName(name);
   const style = {
     background: `linear-gradient(90deg, ${colors[0]} 50%, ${colors[1] ||
       colors[0]} 50%)`
   };
   return (
-    <div className="pokemon" style={style} onClick={handleClick}>
+    <div className="pokemon" style={style}>
       <Link to={"/" + name}>
         <div
           className="pokemon__image"

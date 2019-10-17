@@ -28,7 +28,7 @@ class Details extends React.Component {
     }
   };
 
-  componentWillUpdate = () => {
+  componentDidUpdate = () => {
     getDetailsFromServer(this.props.pokemonName).then(details =>
       this.setState({ details })
     );
