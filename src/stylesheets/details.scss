@@ -82,12 +82,7 @@
       column-gap: 40px;
       padding: 0 20px 20px;
     }
-    &__title {
-      grid-column: span 2;
-      margin: 10px 0;
-      color: white;
-      font-weight: 400;
-    }
+
     &__text {
       margin: 0 10px;
       border-bottom: 1px solid gray;
@@ -105,6 +100,34 @@
         font-weight: bold;
         text-align: left;
       }
+    }
+  }
+  .evolution {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__list {
+      list-style: none;
+      padding: 0;
+      width: 120px;
+      height: 120px;
+      // &::after {
+      //   content: " \21D2";
+      //   position: relative;
+      //   top: -70px;
+      //   left: 50px;
+      //   font-size: 2rem;
+      // }
+      // &:last-of-type::after {
+      //   content: "";
+      // }
+    }
+    .currentPokemon {
+      img {
+        width: 120px;
+      }
+      border: 1px solid black;
+      border-radius: 50%;
     }
   }
 }
@@ -147,6 +170,15 @@
       border: 7px solid black;
     }
   }
+}
+
+.--title {
+  grid-column: span 2;
+  margin: 10px 0;
+  padding: 0 10px;
+  color: white;
+  font-weight: 400;
+  text-align: left;
 }
 
 @keyframes spin {
