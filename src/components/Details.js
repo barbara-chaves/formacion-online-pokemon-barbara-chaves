@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../stylesheets/details.scss";
 import getDetailsFromServer from "../modules/getDetailsFromServer";
 import darkenColor from "../modules/darkerColor";
-import Profile from "./Profile";
+import ProfileItem from "./ProfileItem";
 
 class Details extends React.Component {
   constructor(props) {
@@ -11,9 +11,10 @@ class Details extends React.Component {
     this.state = {
       details: {}
     };
+    this.handleEvolutionClick = this.handleEvolutionClick.bind(this)
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.getInicialState();
   };
 
@@ -28,11 +29,11 @@ class Details extends React.Component {
     }
   };
 
-  componentWillUpdate = () => {
+  handleEvolutionClick = () => {
     getDetailsFromServer(this.props.pokemonName).then(details =>
       this.setState({ details })
     );
-  };
+  }
 
   saveLocalStorage = () => {
     if (this.state.details) {
@@ -97,6 +98,7 @@ class Details extends React.Component {
           <li
             key={index}
             className={"evolution__list__item " + currPokemon(pokemon)}
+            onClick={this.handleEvolutionClick}
           >
             <Link to={pokemon.name}>
               <img src={pokemon.image} alt={pokemon.name} />
@@ -120,6 +122,7 @@ class Details extends React.Component {
 
     return Object.keys(this.state.details).length ? (
       <div className="details-page" style={getBGColor()}>
+        <Link to='/'><button  className="back-btn">Back</button></Link>
         <div className="details">
           <h1 className="details__name" style={getTitlesColor()}>
             {name}
@@ -138,12 +141,12 @@ class Details extends React.Component {
               <h2 className="profile__title --title" style={getTitlesColor()}>
                 Profile
               </h2>
-              <Profile quest={"Height: "} data={`${height}m`} />
-              <Profile quest={"Weight: "} data={`${weight}kg`} />
-              <Profile quest={"Catch Rate: "} data={`${capture_rate}%`} />
-              <Profile quest={"Egg Groups: "} data={getList(egg_groups)} />
-              <Profile quest={"Abilities: "} data={getList(abilities)} />
-              <Profile quest={"Gender Ratio: "} data={gender_rate} />
+              <ProfileItem quest={"Height: "} data={`${height}m`} />
+              <ProfileItem quest={"Weight: "} data={`${weight}kg`} />
+              <ProfileItem quest={"Catch Rate: "} data={`${capture_rate}%`} />
+              <ProfileItem quest={"Egg Groups: "} data={getList(egg_groups)} />
+              <ProfileItem quest={"Abilities: "} data={getList(abilities)} />
+              <ProfileItem quest={"Gender Ratio: "} data={gender_rate} />
             </section>
             <section className="evolutions">
               <h2 className="evolutions__title --title" style={getTitlesColor()}>

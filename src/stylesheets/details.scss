@@ -3,6 +3,7 @@
   padding: 50px 10px;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -111,16 +112,6 @@
       padding: 0;
       width: 120px;
       height: 120px;
-      // &::after {
-      //   content: " \21D2";
-      //   position: relative;
-      //   top: -70px;
-      //   left: 50px;
-      //   font-size: 2rem;
-      // }
-      // &:last-of-type::after {
-      //   content: "";
-      // }
     }
     .currentPokemon {
       img {

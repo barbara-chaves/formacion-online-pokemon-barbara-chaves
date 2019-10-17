@@ -8,7 +8,7 @@ const renderCardList = props => {
   return props.pokemons.map((pokemon, index) => {
     return (
       <li className="list__item" key={index}>
-        <Card pokemon={pokemon} getPokemonName={props.getPokemonName} />
+        <Card pokemon={pokemon} getPokemonDetails={props.getPokemonDetails} />
       </li>
     );
   });
