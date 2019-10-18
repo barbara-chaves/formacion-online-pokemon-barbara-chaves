@@ -33,32 +33,43 @@ const getEvolution = info => {
 const formatData = data => {
   const info = Object.assign(data[0], data[1]);
   const {
+    abilities,
     name,
     height,
     id,
     capture_rate,
+    color,
     egg_groups,
     gender_rate,
-    abilities,
+    growth_rate,
+    habitat,
+    base_happiness,
     flavor_text_entries,
     weight,
+    shape,
     sprites,
     types,
     genera
   } = info;
-
+  console.log(info)
   return getEvolution(info).then(evolution => {
     return {
       abilities: abilities.map(ability => ability.ability.name),
       capture_rate: capture_rate,
+      color: color.name,
       colors: getPokemonColor(types),
       egg_groups: egg_groups.map(egg => egg.name),
       evolution: evolution,
       height: height / 10,
       gender_rate: gender_rate,
+      habitat: habitat.name,
+      hapiness: base_happiness,
       id: id,
       image: sprites.front_default,
+      image_back: sprites.back_default,
       name: name,
+      shape: shape.name,
+      growth_rate: growth_rate.name,
       translated_name: getData(genera).genus,
       text: getData(flavor_text_entries).flavor_text,
       types: types.map(type => type.type.name).sort(),

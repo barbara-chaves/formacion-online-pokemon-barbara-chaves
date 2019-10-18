@@ -4,6 +4,7 @@ import "../stylesheets/app.scss";
 import { getPokemonsList } from "../modules/getDataFromServer";
 import List from "./List";
 import Details from "./Details";
+import Footer from './Footer'
 
 class App extends React.Component {
   constructor() {
@@ -54,11 +55,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Switch>
           <Route exact path="/" render={this.renderList} />
           <Route path={"/:name"} render={this.renderDetails} />
         </Switch>
+        <Footer/>
       </div>
     );
   }

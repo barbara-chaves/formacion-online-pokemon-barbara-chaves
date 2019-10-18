@@ -1,6 +1,8 @@
 .buttons {
   max-width: 700px;
   min-width: 300px;
+  display: flex;
+  justify-content: space-around;
 
   .--btn {
     background-color: white;
@@ -9,5 +11,7 @@
     padding: 7px;
     margin: 15px;
     font-size: 1em;
+    font-weight: bold;
+    width: 80px;
   }
 }

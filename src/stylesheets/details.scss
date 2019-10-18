@@ -1,6 +1,9 @@
+* {
+  box-sizing: border-box;
+}
 .details-page {
   box-sizing: border-box;
-  padding: 50px 10px;
+  padding: 50px 0px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,6 +19,9 @@
   @media all and (min-width: 760px) {
     font-size: 20px;
   }
+  @media all and (max-width: 330px) {
+    width: 300px;
+  }
 
   &__name {
     padding: 15px 0;
@@ -29,19 +35,27 @@
   }
   .description {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
     @media all and (min-width: 760px) {
       padding: 0 20px;
     }
 
     &__image {
       grid-column: 1;
-      grid-row: 1/ 2;
+      grid-row: 2;
+      width: 140px;
+      justify-self: right;
+    }
+    &__image_back {
+      grid-column: 2;
+      grid-row: 2;
       width: 140px;
     }
     &__types {
-      grid-column: 2;
+      grid-column: 1;
       grid-row: 1;
+      color: white;
       ul {
         list-style: none;
         margin: 0;
@@ -49,38 +63,40 @@
       }
       li {
         display: inline-block;
-        margin: 10px;
-        padding: 5px 10px;
-        border-radius: 12px;
+        margin: 0 10px;
+        padding: 5px 5px;
+        border-radius: 15px;
       }
     }
     &__id {
       margin: 0;
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 1;
     }
     &__translated_name {
-      grid-row: 2;
-      grid-column: span 3;
+      grid-row: 3;
+      grid-column: span 2;
       text-align: left;
       font-weight: bold;
       margin: 0;
     }
     &__text {
-      grid-row: 3;
-      grid-column: span 3;
+      grid-row: 4;
+      grid-column: span 2;
       text-align: left;
     }
   }
   .profile {
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding-bottom: 20px;
-    @media all and (min-width: 760px) {
-      column-gap: 40px;
-      padding: 0 20px 20px;
+    .profile__wrap {
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-bottom: 20px;
+      @media all and (min-width: 760px) {
+        column-gap: 40px;
+        padding: 0 20px 20px;
+      }
     }
 
     &__text {
@@ -90,6 +106,11 @@
       justify-content: space-between;
       text-transform: capitalize;
       text-align: right;
+      @media all and (max-width: 330px) {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
       ul {
         list-style: none;
         padding: 0;
@@ -102,27 +123,34 @@
       }
     }
   }
-  .evolution {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &__list {
-      list-style: none;
-      padding: 0;
-      width: 120px;
-      height: 120px;
-    }
-    .currentPokemon {
-      img {
-        width: 120px;
+  .evolutions {
+    .evolution {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      &__list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        width: 100px;
+        img {
+          opacity: 0.5;
+        }
       }
-      border: 1px solid black;
-      border-radius: 50%;
+      .currentPokemon {
+        img {
+          opacity: 1;
+        }
+        box-shadow: 0px 0px 3px 2px rgb(151, 151, 151),
+          0px 0px 5px 4px rgb(204, 204, 204);
+        border-radius: 50%;
+      }
     }
   }
 }
 
 .loading {
+  height: 100vh;
   .pokemon {
     width: 200px;
     height: 200px;

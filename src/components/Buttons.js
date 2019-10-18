@@ -6,13 +6,13 @@ const Buttons = props => {
   return (
     <div className="buttons">
       <Link to={props.prev}>
-       <button className="prev-btn --btn">Previous Pokemon</button>
+       <button className="prev-btn --btn">Previous</button>
       </Link>
       <Link to="/">
         <button className="home-btn --btn">Home</button>
       </Link>
       <Link to={props.next}>
-        <button className="next-btn --btn">Next Pokemon</button>
+        <button className="next-btn --btn">Next</button>
       </Link>
     </div>
   );

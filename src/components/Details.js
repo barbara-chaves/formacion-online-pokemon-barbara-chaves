@@ -19,49 +19,42 @@ class Details extends React.Component {
   };
 
   getInicialState = () => {
-    // const detailsFromLocal = JSON.parse(localStorage.getItem("details"));
-    // if (Object.keys(detailsFromLocal).length) {
-    //   this.setState({ details: detailsFromLocal });
-    // } else {
-      getDetailsFromServer(this.props.pokemonName).then(details =>
-        this.setState({ details })
-      );
-    // }
+    getDetailsFromServer(this.props.pokemonName).then(details =>
+      this.setState({ details })
+    );
   };
 
   componentDidUpdate = () => {
-    if (this.props.pokemonName !== this.state.details.name){
+    if (this.props.pokemonName !== this.state.details.name) {
       getDetailsFromServer(this.props.pokemonName).then(details =>
-      this.setState({ details })
-    );
+        this.setState({ details })
+      );
     }
-    
-  }
-
-  // saveLocalStorage = () => {
-  //   if (this.state.details) {
-  //     localStorage.setItem("details", JSON.stringify(this.state.details));
-  //   }
-  // };
+  };
 
   render() {
-    // this.saveLocalStorage();
 
     const {
       abilities,
-      name,
-      height,
       capture_rate,
+      color,
       colors,
       egg_groups,
       evolution,
+      gender_rate,
+      growth_rate,
+      habitat,
+      height,
+      hapiness,
       id,
       image,
-      weight,
-      gender_rate,
+      image_back,
+      name,
+      shape,
       text,
       translated_name,
-      types
+      types,
+      weight
     } = this.state.details;
 
     const getBGColor = () => {
@@ -90,13 +83,13 @@ class Details extends React.Component {
 
     const getEvolution = () => {
       const currPokemon = pokemon => {
-        return pokemon.name === name ? "currentPokemon" : null;
+        return pokemon.name === name ? "currentPokemon" : '';
       };
 
       const getEvolutionItem = (e, index) => {
         const pokemon = this.props.pokemonList.find(
           pokemon => pokemon.name === e
-        );
+          );
         return pokemon ? (
           <li
             key={index}
@@ -123,17 +116,21 @@ class Details extends React.Component {
       );
     };
 
-    const getPrevPokemon = (id) => {
-      return id > 1 ? this.props.pokemonList.filter(pok => pok.id === id - 1)[0].name : ''
-    }
+    const getPrevPokemon = id => {
+      return id > 1
+        ? this.props.pokemonList.filter(pok => pok.id === id - 1)[0].name
+        : "";
+    };
 
-    const getNextPokemon = (id) => {
-      return id < 151 ? this.props.pokemonList.filter(pok => pok.id === id + 1)[0].name : ''
-    }
+    const getNextPokemon = id => {
+      return id < 151
+        ? this.props.pokemonList.filter(pok => pok.id === id + 1)[0].name
+        : "";
+    };
 
     return Object.keys(this.state.details).length ? (
       <div className="details-page" style={getBGColor()}>
-        <Buttons prev={getPrevPokemon(id)} next={getNextPokemon(id)}/>
+        <Buttons prev={getPrevPokemon(id)} next={getNextPokemon(id)} />
         <div className="details">
           <h1 className="details__name" style={getTitlesColor()}>
             {name}
@@ -141,8 +138,9 @@ class Details extends React.Component {
           <div className="details__container">
             <section className="description">
               <img className="description__image" src={image} alt={name} />
+              <img className="description__image_back" src={image_back} alt={name} />
               <div className="description__types">
-                <ul>{getList(types, colors)}</ul>
+                {getList(types, colors)}
               </div>
               <h3 className="description__id">{`# ${id}`}</h3>
               <p className="description__translated_name">{translated_name}</p>
@@ -152,16 +150,25 @@ class Details extends React.Component {
               <h2 className="profile__title --title" style={getTitlesColor()}>
                 Profile
               </h2>
+              <div className='profile__wrap'>
               <ProfileItem quest={"Height: "} data={`${height}m`} />
               <ProfileItem quest={"Weight: "} data={`${weight}kg`} />
               <ProfileItem quest={"Catch Rate: "} data={`${capture_rate}%`} />
-              <ProfileItem quest={"Egg Groups: "} data={getList(egg_groups)} />
+              <ProfileItem quest={"Hapiness: "} data={`${hapiness}%`} />
+              <ProfileItem quest={"Habitat: "} data={habitat} />
+              <ProfileItem quest={"Growth Rate: "} data={growth_rate} />
+              <ProfileItem quest={"Color: "} data={color} />
+              <ProfileItem quest={"Shape: "} data={shape} />
               <ProfileItem quest={"Abilities: "} data={getList(abilities)} />
-              <ProfileItem quest={"Gender Ratio: "} data={gender_rate} />
+              <ProfileItem quest={"Egg Groups: "} data={getList(egg_groups)} />
+              </div>
             </section>
             <section className="evolutions">
-              <h2 className="evolutions__title --title" style={getTitlesColor()}>
-                Evolutions
+              <h2
+                className="evolutions__title --title"
+                style={getTitlesColor()}
+              >
+                Evolution Chain
               </h2>
               <div className="evolution">{getEvolution()}</div>
             </section>
