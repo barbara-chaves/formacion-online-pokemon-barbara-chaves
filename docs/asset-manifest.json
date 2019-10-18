@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "./static/css/main.7bd85318.chunk.css",
-    "main.js": "./static/js/main.b7c2257f.chunk.js",
-    "main.js.map": "./static/js/main.b7c2257f.chunk.js.map",
+    "main.css": "./static/css/main.2cc45fb0.chunk.css",
+    "main.js": "./static/js/main.5f4db69f.chunk.js",
+    "main.js.map": "./static/js/main.5f4db69f.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.e6cdb6f2.js",
     "runtime-main.js.map": "./static/js/runtime-main.e6cdb6f2.js.map",
-    "static/js/2.cd9524a1.chunk.js": "./static/js/2.cd9524a1.chunk.js",
-    "static/js/2.cd9524a1.chunk.js.map": "./static/js/2.cd9524a1.chunk.js.map",
+    "static/js/2.3f2e22ed.chunk.js": "./static/js/2.3f2e22ed.chunk.js",
+    "static/js/2.3f2e22ed.chunk.js.map": "./static/js/2.3f2e22ed.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.efcce6bf8372fdda2150ae4b3025af63.js": "./precache-manifest.efcce6bf8372fdda2150ae4b3025af63.js",
+    "precache-manifest.dfbb16d6a0a9e905697ac0e57b7e44fb.js": "./precache-manifest.dfbb16d6a0a9e905697ac0e57b7e44fb.js",
     "service-worker.js": "./service-worker.js",
-    "static/css/main.7bd85318.chunk.css.map": "./static/css/main.7bd85318.chunk.css.map",
-    "static/media/header.scss": "./static/media/Pokémon_logo.49255cb2.png"
+    "static/css/main.2cc45fb0.chunk.css.map": "./static/css/main.2cc45fb0.chunk.css.map",
+    "static/media/header.scss": "./static/media/Pokémon_logo.49255cb2.png",
+    "static/media/adalav.jpg": "./static/media/adalav.befe2096.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.e6cdb6f2.js",
-    "static/js/2.cd9524a1.chunk.js",
-    "static/css/main.7bd85318.chunk.css",
-    "static/js/main.b7c2257f.chunk.js"
+    "static/js/2.3f2e22ed.chunk.js",
+    "static/css/main.2cc45fb0.chunk.css",
+    "static/js/main.5f4db69f.chunk.js"
   ]
 }

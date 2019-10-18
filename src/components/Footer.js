@@ -1,5 +1,6 @@
 import React from "react";
 import "../stylesheets/footer.scss";
+import adalabLogo from '../images/adalav.jpg'
 
 const footer = () => {
   return (
@@ -13,6 +14,8 @@ const footer = () => {
           <i className="fab fa-github-square"></i>
         </a>
       </div>
+      <a href="https://adalab.es/">
+        <img src={adalabLogo} alt='Adalab' width='90px'></img></a>
     </footer>
   );
 };
